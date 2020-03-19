@@ -38,7 +38,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"  placeholder="Product Name" value="{{ old('name') }}" required>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Product Name" value="{{ old('name') }}" required>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -86,11 +86,11 @@
 
                             <div class="col-md-6" style="padding-top: 5px">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="condition" id="conditionNew" value="1" @if(old('condition') ==  "1") checked="checked" @endif required required>
+                                    <input class="form-check-input" type="radio" name="condition" id="conditionNew" value="1" @if(old('condition') ==  "1") checked="checked" @endif required>
                                     <label class="form-check-label" for="conditionNew">New</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="condition" id="conditionUsed" value="0" @if(old('condition') ==  "0") checked="checked" @endif required required>
+                                    <input class="form-check-input" type="radio" name="condition" id="conditionUsed" value="0" @if(old('condition') ==  "0") checked="checked" @endif required>
                                     <label class="form-check-label" for="conditionUsed">Used</label>
                                 </div>
                             </div>
@@ -132,11 +132,11 @@
 
                             <div class="col-md-6">
                                 <input type="file" name="image[]" class="form-control-file @error('image.*') is-invalid @enderror" multiple="true">
-                                    @error('image.*')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                @error('image.*')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 

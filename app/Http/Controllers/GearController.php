@@ -94,7 +94,6 @@ class GearController extends Controller
      */
     public function store(Request $request)
     {
-
         $this->validator($request->all())->validate();
 
         $gear = new Gear;
@@ -130,7 +129,6 @@ class GearController extends Controller
             foreach ($images as $key => $image) {
                 $name = $image->getClientOriginalName();
 
-                //validation
                 if (!in_array($image->getClientOriginalExtension(), array('jpg','png','jpeg'))) {
                     return back()
                         ->withInput($request->all())
