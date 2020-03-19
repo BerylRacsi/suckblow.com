@@ -48,14 +48,14 @@
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="info">
+                    <div class="col-8 info">
                         <a href="javascript:void(0)" class="d-block">
                             {{ Auth::user()->name }}
                         </a>
                     </div>
-                    <div class="info">
-                        <a href="#" class="d-block" data-toggle="modal" data-target="#modal-logout">
-                            <i class="fas fa-sign-out-alt"></i>
+                    <div class="col-4 info" style="display: flex; justify-content: center;">
+                        <a href="#" class="d-block" data-toggle="modal" data-target="#modal-logout" style="float: right;">
+                            <i class="fas fa-sign-out-alt fa-lg"></i>
                         </a>
                     </div>
                 </div>
@@ -277,6 +277,8 @@
         
     </div>
 <!-- ./wrapper -->
+
+@include('sweetalert::alert')
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->

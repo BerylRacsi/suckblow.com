@@ -126,7 +126,7 @@ class PartnerController extends Controller
 
         $partner->save();
 
-        return redirect()->intended('admin/partner-account')->with('status','Account edited.');
+        return redirect()->intended('admin/partner-account')->with('success','Account edited.');
     }
 
     /**
@@ -145,6 +145,6 @@ class PartnerController extends Controller
 
         $partner->delete();
 
-        return redirect()->intended('admin/partner-account')->with('status','Account removed');
+        return redirect()->intended('admin/partner-account')->with('success','Account removed');
     }
 }

@@ -38,5 +38,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth:admin'], function () {
     Route::resource('admin-account','AdminController');
     Route::resource('user-account','UserController');
     Route::resource('partner-account','PartnerController');
+
+    Route::resource('gear','GearController');
 });
 

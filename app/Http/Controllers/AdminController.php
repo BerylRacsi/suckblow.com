@@ -66,7 +66,7 @@ class AdminController extends Controller
 
         $admin->save();
 
-        return redirect()->intended('admin/admin-account')->with('status','Account created.');
+        return redirect()->intended('admin/admin-account')->with('success','Account created.');
     }
 
     /**
@@ -111,7 +111,7 @@ class AdminController extends Controller
 
         $admin->save();
 
-        return redirect()->intended('admin/admin-account')->with('status','Account edited.');
+        return redirect()->intended('admin/admin-account')->with('success','Account edited.');
     }
 
     /**
@@ -126,6 +126,6 @@ class AdminController extends Controller
 
         $admin->delete();
 
-        return redirect()->intended('admin/admin-account')->with('status','Account removed.');
+        return redirect()->intended('admin/admin-account')->with('success','Account removed.');
     }
 }

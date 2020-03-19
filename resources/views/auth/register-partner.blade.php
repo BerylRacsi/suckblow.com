@@ -81,7 +81,11 @@
 
                             <div class="col-md-6">
                                 <select id="category" name="category" class="form-control" required>
-                                    <option value="" disabled selected>Select Store Category</option>
+                                    @if(NULL !== old('category'))
+                                        <option value="{{ old('category') }}" selected>{{ old('category') }}</option>
+                                    @else
+                                        <option value="" disabled selected>Select Store Category</option>
+                                    @endif
                                     <option value="Gear">Gear</option>
                                     <option value="Trip">Trip</option>
                                     <option value="Course">Course</option>
@@ -94,7 +98,11 @@
 
                             <div class="col-md-6">
                                 <select id="country" name="country" class="form-control" required>
-                                    <option value="" disabled selected>Select Country</option>
+                                    @if(NULL !== old('country'))
+                                        <option value="{{ old('country') }}" selected>{{ old('country') }}</option>
+                                    @else
+                                        <option value="" disabled selected>Select Country</option>
+                                    @endif
                                     <option value="Afganistan">Afghanistan</option>
                                     <option value="Albania">Albania</option>
                                     <option value="Algeria">Algeria</option>

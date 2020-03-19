@@ -119,7 +119,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->intended('admin/user-account')->with('status','Account edited.');
+        return redirect()->intended('admin/user-account')->with('success','Account edited.');
     }
 
     /**
@@ -138,6 +138,6 @@ class UserController extends Controller
 
         $user->delete();
 
-        return redirect()->intended('admin/user-account')->with('status','Account removed');
+        return redirect()->intended('admin/user-account')->with('success','Account removed');
     }
 }
