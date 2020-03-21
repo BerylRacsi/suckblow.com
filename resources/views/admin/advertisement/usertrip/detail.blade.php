@@ -13,50 +13,34 @@
                             <tbody>
                                 <tr>
                                     <th>Name</th>
-                                    <td>{{$gear->name}}</td>
-                                </tr>
-                                <tr>
-                                    <th>Category</th>
-                                    <td>{{$gear->category}}</td>
+                                    <td>{{$trip->name}}</td>
                                 </tr>
                                 <tr>
                                     <th>Description</th>
-                                    <td>{{$gear->description}}</td>
+                                    <td>{{$trip->description}}</td>
                                 </tr>
                                 <tr>
                                     <th>Price</th>
-                                    <td>Rp {{$gear->price}}</td>
+                                    <td>{{$trip->price}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Condition</th>
-                                    <td>
-                                        @if($gear->condition == 1)
-                                            New
-                                        @else
-                                            Used
-                                        @endif
-                                    </td>
+                                    <th>Location</th>
+                                    <td>{{$trip->location}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Warranty</th>
-                                    <td>
-                                        @if($gear->warranty == 1)
-                                            Yes
-                                        @else
-                                            No
-                                        @endif
-                                    </td>
+                                    <th>Duration</th>
+                                    <td>{{$trip->length}}</td>
                                 </tr>
                                 <tr>
-                                    <th>Youtube Link</th>
+                                    <th>Itinerary</th>
                                     <td>
-                                        <a href="{{$gear->link}}">{{$gear->link}}</a>
+                                        <img src="{{ asset('/'.$trip->itinerary) }}" alt="IMG-PRODUCT" width="150" height="150">
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Photos</th>
                                     <td>
-                                        @foreach (explode(',', $gear->image) as $image)
+                                        @foreach (explode(',', $trip->image) as $image)
                                         <div class="col-md-4">
                                             <img src="{{ asset('/'.$image) }}" alt="IMG-PRODUCT" width="150" height="150">
                                         </div>

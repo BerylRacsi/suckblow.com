@@ -39,7 +39,7 @@ class GearController extends Controller
             'link' => ['required', 'string', 'max:50'],
             'condition' => ['required','boolean'],
             'warranty' => ['required','boolean'],
-
+            
             'image.*' => 'image',
         ]);
     }

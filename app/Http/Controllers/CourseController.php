@@ -189,7 +189,19 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        //
+        $course = Course::find($id);
+
+        $role = $this->guardCheck();
+
+        switch ($role) {
+            case 'admin':
+                return view('admin/advertisement/course/detail',compact('course'));
+                break;
+            
+            default:
+                return view('welcome');
+                break;
+        }
     }
 
     /**
