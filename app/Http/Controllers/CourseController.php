@@ -135,7 +135,7 @@ class CourseController extends Controller
             //validation
             $name = $avatar->getClientOriginalName();
 
-            if (!in_array($avatar->getClientOriginalExtension(), array('jpg','png','jpeg'))) {
+            if (!in_array($avatar->getClientOriginalExtension(), array('jpg','png','jpeg','JPG','PNG','JPEG'))) {
                 return back()
                     ->withInput($request->all())
                     ->withErrors('Failed to upload image : '.$name.', only JPG, PNG, and JPEG are allowed.');
@@ -264,7 +264,7 @@ class CourseController extends Controller
             //validation
             $name = $avatar->getClientOriginalName();
 
-            if (!in_array($avatar->getClientOriginalExtension(), array('jpg','png','jpeg'))) {
+            if (!in_array($avatar->getClientOriginalExtension(), array('jpg','png','jpeg','JPG','PNG','JPEG'))) {
                 return back()
                     ->withInput($request->all())
                     ->withErrors('Failed to upload image : '.$name.', only JPG, PNG, and JPEG are allowed.');

@@ -42,5 +42,6 @@ Route::group(['prefix' => 'admin','middleware' => 'auth:admin'], function () {
     Route::resource('gear','GearController');
     Route::resource('course','CourseController');
     Route::resource('usertrip','UserTripController');
+    Route::resource('partnertrip','PartnerTripController');
 });
 

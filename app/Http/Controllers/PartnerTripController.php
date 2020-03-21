@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-use App\UserTrip;
+use App\PartnerTrip;
+use App\Agency;
+use App\Facility;
 use File;
 use Image;
 use Alert;
 
-class UserTripController extends Controller
+class PartnerTripController extends Controller
 {
     protected function guardCheck()
     {
@@ -36,10 +38,11 @@ class UserTripController extends Controller
             'description' => ['required','max:150'],
             'price' => ['required','numeric','max:1000000000000','min:100'],
             'location' => ['required','string'],
-            'length' => ['required','numeric','max:100','min:1'],
+            'address' => ['required', 'string', 'max:100'],
+            'since' => ['required','numeric','max:2020','min:1900'],
 
-            'itinerary.*' => ['image'],
-            'image.*' => ['image'],
+            'logo.*' => 'image',
+            'image.*' => 'image',
         ]);
     }
 
@@ -50,13 +53,13 @@ class UserTripController extends Controller
      */
     public function index()
     {
-        $trips = UserTrip::all();
+        $trips = PartnerTrip::all();
 
         $role = $this->guardCheck();
 
         switch ($role) {
             case 'admin':
-                return view('admin/advertisement/usertrip/index',compact('trips'));
+                return view('admin/advertisement/partnertrip/index',compact('trips'));
                 break;
             
             default:
@@ -72,11 +75,14 @@ class UserTripController extends Controller
      */
     public function create()
     {
+        $agencies = Agency::all();
+        $facilities = Facility::all();
+
         $role = $this->guardCheck();
 
         switch ($role) {
             case 'admin':
-                return view('admin/advertisement/usertrip/create');
+                return view('admin/advertisement/partnertrip/create',compact('agencies','facilities'));
                 break;
             
             default:
@@ -95,22 +101,37 @@ class UserTripController extends Controller
     {
         $this->validator($request->all())->validate();
 
-        $trip = new UserTrip;
+        $trip = new PartnerTrip;
         $trip->name = $request->input('name');
         $trip->description = $request->input('description');
         $trip->price = $request->input('price');
         $trip->location = $request->input('location');
-        $trip->length = $request->input('length');
+        $trip->address = $request->input('address');
+        $trip->since = $request->input('since');
 
-        if ($request->hasFile('itinerary') && $request->hasFile('image')) {
+        if ($request->has('agency')) {
+            $trip->agency = implode(',', $request->input('agency'));
+        }
+        else{
+            $trip->agency =  'Not related to any registered agencies.';
+        }
 
-            //itinerary
-            $itinerary = $request->file('itinerary');
+        if ($request->has('facility')) {
+            $trip->facility = implode(',', $request->input('facility'));
+        }
+        else{
+            $trip->facility =  'None';
+        }
+
+        if ($request->hasFile('logo') && $request->hasFile('image')) {
+
+            //logo
+            $logo = $request->file('logo');
 
             $dir_img = true;
 
-            if( ! File::exists('images/itinerary/')) {
-                $dir_img = File::makeDirectory('images/itinerary/', 0777, true);
+            if( ! File::exists('images/company_logo/')) {
+                $dir_img = File::makeDirectory('images/company_logo/', 0777, true);
             }
 
             //images
@@ -120,23 +141,23 @@ class UserTripController extends Controller
 
             $path = [];
  
-            if( ! File::exists('images/user_trip_photos/')) {
-                $org_img = File::makeDirectory('images/user_trip_photos/', 0777, true);
+            if( ! File::exists('images/partner_trip_photos/')) {
+                $org_img = File::makeDirectory('images/partner_trip_photos/', 0777, true);
             }
 
-            //validationItinerary
-            $nameItinerary = $itinerary->getClientOriginalName();
+            //validationLogo
+            $nameLogo = $logo->getClientOriginalName();
 
-            if (!in_array($itinerary->getClientOriginalExtension(), array('jpg','png','jpeg','JPG','PNG','JPEG'))) {
+            if (!in_array($logo->getClientOriginalExtension(), array('jpg','png','jpeg','JPG','PNG','JPEG'))) {
                 return back()
                     ->withInput($request->all())
-                    ->withErrors('Failed to upload image : '.$nameItinerary.', only JPG, PNG, and JPEG are allowed.');
+                    ->withErrors('Failed to upload image : '.$nameLogo.', only JPG, PNG, and JPEG are allowed.');
             }
 
-            if ($itinerary->getSize() > 1000000) {
+            if ($logo->getSize() > 1000000) {
                 return back()
                     ->withInput($request->all())
-                    ->withErrors('Failed to upload image : '.$nameItinerary.', maximum allowed image size is 1 MB.');
+                    ->withErrors('Failed to upload image : '.$nameLogo.', maximum allowed image size is 1 MB.');
             }
 
             // validationImages
@@ -161,17 +182,17 @@ class UserTripController extends Controller
                 }
             }
 
-            // Itinerary
-            $filenameitinerary = rand(1111,9999).time().'.'.$itinerary->getClientOriginalExtension();
-            $image_path = 'images/itinerary/'.$filenameitinerary;
+            // logo
+            $filenameLogo = rand(1111,9999).time().'.'.$logo->getClientOriginalExtension();
+            $image_path = 'images/company_logo/'.$filenameLogo;
 
-            Image::make($itinerary)
+            Image::make($logo)
                 ->fit(640,640,function($constraint){
                     $constraint->upsize();
                 })
                 ->save($image_path);
             
-            $trip->itinerary = $image_path;
+            $trip->logo = $image_path;
 
             // Images
             foreach($images as $key => $image) {
@@ -180,7 +201,7 @@ class UserTripController extends Controller
                 $filenameImages = rand(1111,9999).time().'.'.$image->getClientOriginalExtension();
 
                 //path of image for upload
-                $org_path = 'images/user_trip_photos/' . $filenameImages;
+                $org_path = 'images/partner_trip_photos/' . $filenameImages;
 
                 $path[$key] = $org_path;
 
@@ -194,10 +215,10 @@ class UserTripController extends Controller
             $trip->image = $stringpath;
         }
 
-        else if(!$request->hasFile('itinerary')){
+        else if(!$request->hasFile('logo')){
             return back()
                 ->withInput($request->all())
-                ->withErrors('You need to upload an image for itinerary.');
+                ->withErrors('You need to upload an image for logo.');
         }
         else if(!$request->hasFile('image')){
             return back()
@@ -212,7 +233,7 @@ class UserTripController extends Controller
         switch ($role) {
             case 'admin':
 
-                return redirect()->intended('admin/usertrip')->with('success','Ads Submitted.');
+                return redirect()->intended('admin/partnertrip')->with('success','Ads Submitted.');
                 break;
             
             default:
@@ -229,13 +250,40 @@ class UserTripController extends Controller
      */
     public function show($id)
     {
-        $trip = UserTrip::find($id);
+        $trip = PartnerTrip::find($id);
+        $agencies = Agency::all();
+        $facilities = Facility::all();
+
+        $agencyArray = [];
+        $facilitiesArray = [];
+
+        foreach ($agencies as $key => $agency) {
+            foreach (explode(',', $trip->agency) as $checked) {
+                if ($agency->name === $checked) {
+                    $agencyArray[$key] = 'checked'; 
+
+                    continue 2;
+                }
+            }
+            $agencyArray[$key] = NULL;
+        }
+
+        foreach ($facilities as $key => $facility) {
+            foreach (explode(',', $trip->facility) as $checked) {
+                if ($facility->name === $checked) {
+                    $facilityArray[$key] = 'checked'; 
+
+                    continue 2;
+                }
+            }
+            $facilityArray[$key] = NULL;
+        }
 
         $role = $this->guardCheck();
 
         switch ($role) {
             case 'admin':
-                return view('admin/advertisement/usertrip/detail',compact('trip'));
+                return view('admin/advertisement/partnertrip/detail',compact('trip','agencies','facilities','agencyArray','facilityArray'));
                 break;
             
             default:
@@ -252,13 +300,40 @@ class UserTripController extends Controller
      */
     public function edit($id)
     {
-        $trip = UserTrip::find($id);
+        $trip = PartnerTrip::find($id);
+        $agencies = Agency::all();
+        $facilities = Facility::all();
+
+        $agencyArray = [];
+        $facilitiesArray = [];
+
+        foreach ($agencies as $key => $agency) {
+            foreach (explode(',', $trip->agency) as $checked) {
+                if ($agency->name === $checked) {
+                    $agencyArray[$key] = 'checked'; 
+
+                    continue 2;
+                }
+            }
+            $agencyArray[$key] = NULL;
+        }
+
+        foreach ($facilities as $key => $facility) {
+            foreach (explode(',', $trip->facility) as $checked) {
+                if ($facility->name === $checked) {
+                    $facilityArray[$key] = 'checked'; 
+
+                    continue 2;
+                }
+            }
+            $facilityArray[$key] = NULL;
+        }
 
         $role = $this->guardCheck();
 
         switch ($role) {
             case 'admin':
-                return view('admin/advertisement/usertrip/edit',compact('trip'));
+                return view('admin/advertisement/partnertrip/edit',compact('trip','agencies','facilities','agencyArray','facilityArray'));
                 break;
             
             default:
@@ -278,31 +353,37 @@ class UserTripController extends Controller
     {
         $this->validator($request->all())->validate();
 
-        $trip = UserTrip::find($id);
+        $trip = PartnerTrip::find($id);
         $trip->name = $request->input('name');
         $trip->description = $request->input('description');
         $trip->price = $request->input('price');
         $trip->location = $request->input('location');
-        $trip->length = $request->input('length');
+        $trip->address = $request->input('address');
+        $trip->since = $request->input('since');
 
-        if ($request->hasFile('itinerary') && $request->hasFile('image')) {
-            //itinerary old delete
-            $itineraryOld = $trip->itinerary;
-            File::delete($itineraryOld);
+        if ($request->has('agency')) {
+            $trip->agency = implode(',', $request->input('agency'));
+        }
+        else{
+            $trip->agency =  'Not related to any registered agencies.';
+        }
 
-            //images old delete
-            $imagearray = explode(',', $trip->image);
-            foreach ($imagearray as $image) {
-                File::delete($image);
-            }
+        if ($request->has('facility')) {
+            $trip->facility = implode(',', $request->input('facility'));
+        }
+        else{
+            $trip->facility =  'None';
+        }
 
-            //itinerary
-            $itinerary = $request->file('itinerary');
+        if ($request->hasFile('logo') && $request->hasFile('image')) {
+
+            //logo
+            $logo = $request->file('logo');
 
             $dir_img = true;
 
-            if( ! File::exists('images/itinerary/')) {
-                $dir_img = File::makeDirectory('images/itinerary/', 0777, true);
+            if( ! File::exists('images/company_logo/')) {
+                $dir_img = File::makeDirectory('images/company_logo/', 0777, true);
             }
 
             //images
@@ -312,23 +393,23 @@ class UserTripController extends Controller
 
             $path = [];
  
-            if( ! File::exists('images/user_trip_photos/')) {
-                $org_img = File::makeDirectory('images/user_trip_photos/', 0777, true);
+            if( ! File::exists('images/partner_trip_photos/')) {
+                $org_img = File::makeDirectory('images/partner_trip_photos/', 0777, true);
             }
 
-            //validationItinerary
-            $nameItinerary = $itinerary->getClientOriginalName();
+            //validationLogo
+            $nameLogo = $logo->getClientOriginalName();
 
-            if (!in_array($itinerary->getClientOriginalExtension(), array('jpg','png','jpeg','JPG','PNG','JPEG'))) {
+            if (!in_array($logo->getClientOriginalExtension(), array('jpg','png','jpeg','JPG','PNG','JPEG'))) {
                 return back()
                     ->withInput($request->all())
-                    ->withErrors('Failed to upload image : '.$nameItinerary.', only JPG, PNG, and JPEG are allowed.');
+                    ->withErrors('Failed to upload image : '.$nameLogo.', only JPG, PNG, and JPEG are allowed.');
             }
 
-            if ($itinerary->getSize() > 1000000) {
+            if ($logo->getSize() > 1000000) {
                 return back()
                     ->withInput($request->all())
-                    ->withErrors('Failed to upload image : '.$nameItinerary.', maximum allowed image size is 1 MB.');
+                    ->withErrors('Failed to upload image : '.$nameLogo.', maximum allowed image size is 1 MB.');
             }
 
             // validationImages
@@ -353,17 +434,17 @@ class UserTripController extends Controller
                 }
             }
 
-            // Itinerary
-            $filenameitinerary = rand(1111,9999).time().'.'.$itinerary->getClientOriginalExtension();
-            $image_path = 'images/itinerary/'.$filenameitinerary;
+            // logo
+            $filenameLogo = rand(1111,9999).time().'.'.$logo->getClientOriginalExtension();
+            $image_path = 'images/company_logo/'.$filenameLogo;
 
-            Image::make($itinerary)
+            Image::make($logo)
                 ->fit(640,640,function($constraint){
                     $constraint->upsize();
                 })
                 ->save($image_path);
             
-            $trip->itinerary = $image_path;
+            $trip->logo = $image_path;
 
             // Images
             foreach($images as $key => $image) {
@@ -372,7 +453,7 @@ class UserTripController extends Controller
                 $filenameImages = rand(1111,9999).time().'.'.$image->getClientOriginalExtension();
 
                 //path of image for upload
-                $org_path = 'images/user_trip_photos/' . $filenameImages;
+                $org_path = 'images/partner_trip_photos/' . $filenameImages;
 
                 $path[$key] = $org_path;
 
@@ -385,47 +466,46 @@ class UserTripController extends Controller
             $stringpath = implode(',', $path);
             $trip->image = $stringpath;
         }
+        else if($request->hasfile('logo')) {
+            //logo old delete
+            $logoOld = $trip->logo;
+            File::delete($logoOld);
 
-        else if($request->hasfile('itinerary')) {
-            //itinerary old delete
-            $itineraryOld = $trip->itinerary;
-            File::delete($itineraryOld);
-
-            //itinerary
-            $itinerary = $request->file('itinerary');
+            //logo
+            $logo = $request->file('logo');
 
             $dir_img = true;
 
-            if( ! File::exists('images/itinerary/')) {
-                $dir_img = File::makeDirectory('images/itinerary/', 0777, true);
+            if( ! File::exists('images/company_logo/')) {
+                $dir_img = File::makeDirectory('images/company_logo/', 0777, true);
             }
 
-            //validationItinerary
-            $nameItinerary = $itinerary->getClientOriginalName();
+            //validationLogo
+            $nameLogo = $logo->getClientOriginalName();
 
-            if (!in_array($itinerary->getClientOriginalExtension(), array('jpg','png','jpeg','JPG','PNG','JPEG'))) {
+            if (!in_array($logo->getClientOriginalExtension(), array('jpg','png','jpeg','JPG','PNG','JPEG'))) {
                 return back()
                     ->withInput($request->all())
-                    ->withErrors('Failed to upload image : '.$nameItinerary.', only JPG, PNG, and JPEG are allowed.');
+                    ->withErrors('Failed to upload image : '.$nameLogo.', only JPG, PNG, and JPEG are allowed.');
             }
 
-            if ($itinerary->getSize() > 1000000) {
+            if ($logo->getSize() > 1000000) {
                 return back()
                     ->withInput($request->all())
-                    ->withErrors('Failed to upload image : '.$nameItinerary.', maximum allowed image size is 1 MB.');
+                    ->withErrors('Failed to upload image : '.$nameLogo.', maximum allowed image size is 1 MB.');
             }
 
-            // Itinerary
-            $filenameitinerary = rand(1111,9999).time().'.'.$itinerary->getClientOriginalExtension();
-            $image_path = 'images/itinerary/'.$filenameitinerary;
+            // logo
+            $filenameLogo = rand(1111,9999).time().'.'.$logo->getClientOriginalExtension();
+            $image_path = 'images/company_logo/'.$filenameLogo;
 
-            Image::make($itinerary)
+            Image::make($logo)
                 ->fit(640,640,function($constraint){
                     $constraint->upsize();
                 })
                 ->save($image_path);
             
-            $trip->itinerary = $image_path;
+            $trip->logo = $image_path;
         }
 
         else if($request->hasfile('image')) {
@@ -442,8 +522,8 @@ class UserTripController extends Controller
 
             $path = [];
  
-            if( ! File::exists('images/user_trip_photos/')) {
-                $org_img = File::makeDirectory('images/user_trip_photos/', 0777, true);
+            if( ! File::exists('images/partner_trip_photos/')) {
+                $org_img = File::makeDirectory('images/partner_trip_photos/', 0777, true);
             }
 
             // validationImages
@@ -475,7 +555,7 @@ class UserTripController extends Controller
                 $filenameImages = rand(1111,9999).time().'.'.$image->getClientOriginalExtension();
 
                 //path of image for upload
-                $org_path = 'images/user_trip_photos/' . $filenameImages;
+                $org_path = 'images/partner_trip_photos/' . $filenameImages;
 
                 $path[$key] = $org_path;
 
@@ -496,7 +576,7 @@ class UserTripController extends Controller
         switch ($role) {
             case 'admin':
 
-                return redirect()->intended('admin/usertrip')->with('success','Ads Edited.');
+                return redirect()->intended('admin/partnertrip')->with('success','Ads Edited.');
                 break;
             
             default:
@@ -513,14 +593,14 @@ class UserTripController extends Controller
      */
     public function destroy($id)
     {
-        $trip = UserTrip::find($id);
+        $trip = PartnerTrip::find($id);
 
         $imagearray = explode(',', $trip->image);
         foreach ($imagearray as $image) {
             File::delete($image);
         }
         
-        File::delete($trip->itinerary);
+        File::delete($trip->logo);
 
         $trip->delete();
 
@@ -529,7 +609,7 @@ class UserTripController extends Controller
         switch ($role) {
             case 'admin':
 
-                return redirect()->intended('admin/usertrip')->with('success','Ads Removed.');
+                return redirect()->intended('admin/partnertrip')->with('success','Ads Removed.');
                 break;
             
             default:

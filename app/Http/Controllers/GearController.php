@@ -129,7 +129,7 @@ class GearController extends Controller
             foreach ($images as $key => $image) {
                 $name = $image->getClientOriginalName();
 
-                if (!in_array($image->getClientOriginalExtension(), array('jpg','png','jpeg'))) {
+                if (!in_array($image->getClientOriginalExtension(), array('jpg','png','jpeg','JPG','PNG','JPEG'))) {
                     return back()
                         ->withInput($request->all())
                         ->withErrors('Failed to upload image : '.$name.', only JPG, PNG, and JPEG are allowed.');
@@ -276,7 +276,7 @@ class GearController extends Controller
                 $name = $image->getClientOriginalName();
 
                 //validation
-                if (!in_array($image->getClientOriginalExtension(), array('jpg','png','jpeg'))) {
+                if (!in_array($image->getClientOriginalExtension(), array('jpg','png','jpeg','JPG','PNG','JPEG'))) {
                     return back()
                         ->withInput($request->all())
                         ->withErrors('Failed to upload image : '.$name.', only JPG, PNG, and JPEG are allowed.');
