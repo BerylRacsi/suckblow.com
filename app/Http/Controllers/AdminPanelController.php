@@ -10,4 +10,5 @@ class AdminPanelController extends Controller
     {
         return view('admin/index');
     }
+
 }

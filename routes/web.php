@@ -35,6 +35,13 @@ Route::group(['middleware' => ['auth:partner,web']], function () {
 Route::group(['prefix' => 'admin','middleware' => 'auth:admin'], function () {
 	Route::get('/','AdminPanelController@index');
 
+    Route::get('/manage/agency','ManageController@showAgencyList');
+    Route::get('/manage/facility','ManageController@showFacilityList');
+    Route::post('/manage/agency','ManageController@storeAgency');
+    Route::post('/manage/facility','ManageController@storeFacility');
+    Route::delete('/manage/agency/{id}','ManageController@deleteAgency');
+    Route::delete('/manage/facility/{id}','ManageController@deleteFacility');
+
     Route::resource('admin-account','AdminController');
     Route::resource('user-account','UserController');
     Route::resource('partner-account','PartnerController');

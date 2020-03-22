@@ -36,7 +36,7 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdownAction">
                                     <a href="{{url('admin/gear/'.$gear->id.'/edit')}}" class="dropdown-item">Edit</a>
                                     <a href="{{url('admin/gear/'.$gear->id)}}" class="dropdown-item">Detail</a>
-                                    <form action="{{action('GearController@destroy', $gear->id)}}" method="POST" id="deleteForm">
+                                    <form action="{{action('GearController@destroy', $gear->id)}}" method="POST">
                                         @csrf
                                         <input name="_method" type="hidden" value="DELETE">
                                         <a href="#" onclick="this.parentNode.submit(); return false" class="dropdown-item">Delete</a>
