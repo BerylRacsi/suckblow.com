@@ -3,7 +3,9 @@
 /public/storage
 /public/images/*
 !/public/images/agency_logo
+!/public/images/layout
 /public/adminpanel
+/public/main/vendors
 /storage/*.key
 /vendor
 .env

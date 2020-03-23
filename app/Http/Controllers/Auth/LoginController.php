@@ -66,7 +66,7 @@ class LoginController extends Controller
     /*Admin Login*/
     public function showAdminLoginForm()
     {
-        return view('auth.login', [
+        return view('admin.login', [
             'url' => Config::get('constants.guards.admin')
         ]);
     }
