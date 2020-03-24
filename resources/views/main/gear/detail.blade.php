@@ -56,7 +56,9 @@
 							<a href="#">
 								<strong>
 								<span>Product Video</span> :
-								<i class="fab fa-youtube fa-2x" style="margin-left: 5px"></i>
+                <a href="{{$gear->link}}">
+                  <i class="fab fa-youtube fa-2x" style="margin-left: 5px"></i>
+                </a>
                 </strong>
 							</a>
 						</li>

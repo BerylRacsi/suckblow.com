@@ -6,6 +6,9 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <title>Suck Blow | Admin Panel</title>
+
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
+    
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{asset('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')}}">
     <!-- Font Awesome Icons -->

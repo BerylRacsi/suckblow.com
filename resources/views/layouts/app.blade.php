@@ -9,6 +9,8 @@
 
     <title>{{ config('app.name', 'Suck Blow') }}</title>
 
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
+    
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 

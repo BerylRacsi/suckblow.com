@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Suck Blow</title>
+
+  <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
+
   <link rel="stylesheet" href="{{asset('main/vendors/bootstrap/bootstrap.min.css')}}">
   <link rel="stylesheet" href="{{asset('main/vendors/fontawesome/css/all.min.css')}}">
   <link rel="stylesheet" href="{{asset('main/vendors/themify-icons/themify-icons.css')}}">
@@ -108,11 +111,11 @@
           <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="single-footer-widget tp_widgets">
               <h4 class="footer_title large_title">Our Mission</h4>
-              <p>
+              <p style="color: #fff;">
                 So seed seed green that winged cattle in. Gathering thing made fly you're no 
                 divided deep moved us lan Gathering thing us land years living.
               </p>
-              <p>
+              <p style="color: #fff;">
                 So seed seed green that winged cattle in. Gathering thing made fly you're no divided deep moved 
               </p>
             </div>
@@ -121,7 +124,11 @@
             <div class="single-footer-widget tp_widgets">
               <h4 class="footer_title">Quick Links</h4>
               <ul class="list">
+                @guest
                 <li><a href="{{url('/')}}">Home</a></li>
+                @else
+                <li><a href="{{url('/home')}}">Home</a></li>
+                @endguest
                 <li><a href="{{url('/blog')}}">Blog</a></li>
                 <li><a href="{{url('/about')}}">About</a></li>
                 <li><a href="{{url('/contact')}}">Contact</a></li>

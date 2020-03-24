@@ -29,15 +29,15 @@
                               <img src="{{asset('images/site-content/home/hero-slide1.png')}}" alt="" width="100" height="100">
                           </div>
                           <div class="media-body">
-                              <p>Minimalistic shop for multipurpose use</p>
+                              <p>Dummy Ads Name</p>
                           </div>
                       </div>
                     </td>
                     <td>
-                      <h5>Diving Mask</h5>
+                      <h5>Dummy Category</h5>
                     </td>
                     <td>
-                      <h5>Rp 1500000</h5>
+                      <h5>Rp&nbsp999.999</h5>
                     </td>
                     <td style="display: flex; justify-content: center;">
                       <div class="btn-group">
@@ -46,10 +46,10 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownAction">
                             <a href="#" class="dropdown-item">Edit</a>
-                            <a href="{#" class="dropdown-item">Detail</a>
+                            <a href="#" class="dropdown-item">Detail</a>
                             <form action="#" method="POST">
                                 @csrf
-                                <input name="_method" type="hidden" value="DELETE">
+                                <input name="_method" type="hidden" value="#">
                                 <a href="#" onclick="this.parentNode.submit(); return false" class="dropdown-item">Delete</a>
                             </form>
                         </div>
@@ -82,15 +82,15 @@
                               <img src="{{asset('images/site-content/home/hero-slide1.png')}}" alt="" width="100" height="100">
                           </div>
                           <div class="media-body">
-                              <p>Minimalistic shop for multipurpose use</p>
+                              <p>Dummy Ads Name</p>
                           </div>
                       </div>
                     </td>
                     <td>
-                      <h5>PADI</h5>
+                      <h5>Dummy Agency</h5>
                     </td>
                     <td>
-                      <h5>ITS</h5>
+                      <h5>Dummy Dive Center</h5>
                     </td>
                     <td style="display: flex; justify-content: center;">
                       <div class="btn-group">
@@ -99,10 +99,10 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownAction">
                             <a href="#" class="dropdown-item">Edit</a>
-                            <a href="{#" class="dropdown-item">Detail</a>
+                            <a href="#" class="dropdown-item">Detail</a>
                             <form action="#" method="POST">
                                 @csrf
-                                <input name="_method" type="hidden" value="DELETE">
+                                <input name="_method" type="hidden" value="#">
                                 <a href="#" onclick="this.parentNode.submit(); return false" class="dropdown-item">Delete</a>
                             </form>
                         </div>
@@ -135,15 +135,15 @@
                               <img src="{{asset('images/site-content/home/hero-slide1.png')}}" alt="" width="100" height="100">
                           </div>
                           <div class="media-body">
-                              <p>Minimalistic shop for multipurpose use</p>
+                              <p>Dummy Ads Names</p>
                           </div>
                       </div>
                     </td>
                     <td>
-                      <h5>Maldives</h5>
+                      <h5>Dummy Location</h5>
                     </td>
                     <td>
-                      <h5>$720.00</h5>
+                      <h5>Rp&nbsp999.999</h5>
                     </td>
                     <td style="display: flex; justify-content: center;">
                       <div class="btn-group">
@@ -152,10 +152,10 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownAction">
                             <a href="#" class="dropdown-item">Edit</a>
-                            <a href="{#" class="dropdown-item">Detail</a>
+                            <a href="#" class="dropdown-item">Detail</a>
                             <form action="#" method="POST">
                                 @csrf
-                                <input name="_method" type="hidden" value="DELETE">
+                                <input name="_method" type="hidden" value="#">
                                 <a href="#" onclick="this.parentNode.submit(); return false" class="dropdown-item">Delete</a>
                             </form>
                         </div>
@@ -175,28 +175,35 @@
       <div class="col-lg-4">
         <div class="blog_right_sidebar">
           <aside class="single_sidebar_widget author_widget">
-              <img class="author_img rounded-circle" src="{{asset('images/site-content/home/hero-slide1.png')}}" alt="" width="120" height="120">
-              <h4>Charlie Barber</h4>
-              <p>Regular User</p>
+              <img class="author_img rounded-circle" src="{{asset($user->image)}}" alt="" width="120" height="120">
+              <h4>{{$user->name}}</h4>
+              @if(Auth::guard('partner')->check())
+                  <p>Official Partner</p>
+              @elseif(Auth::guard('web')->check())
+                  <p>Regular User</p>
+              @endif
               <hr>
               
           </aside>
         
           <aside class="single_sidebar_widget post_category_widget">
             <p class="text-center">
-                Jl. Mrica IV No. 51 Perumahan Lembah Hijau
+                {{$user->address}}
+                @if(Auth::guard('partner')->check())
+                    {{$user->city}}&nbsp{{$user->province}}&nbsp{{$user->country}}
+                @endif
               </p>
               <ul class="list cat-list">
                   <li>
                       <a href="#" class="d-flex justify-content-between">
                           <p>Email</p>
-                          <p>racsiberyl@gmail.com</p>
+                          <p>{{$user->email}}</p>
                       </a>
                   </li>
                   <li>
                       <a href="#" class="d-flex justify-content-between">
                           <p>Phone</p>
-                          <p>081329519877</p>
+                          <p>{{$user->phone}}</p>
                       </a>
                   </li>
               </ul>

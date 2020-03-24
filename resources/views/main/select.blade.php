@@ -22,7 +22,7 @@
       </div>
       <div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
           <div class="categories_post">
-            <a href="{{url('/post/gear')}}">
+            <a href="{{url('/post/course')}}">
               <img class="card-img rounded-0" src="{{asset('images/site-content/home/hero-slide2.png')}}" alt="post">
               <div class="categories_details">
                   <div class="categories_text">
@@ -36,7 +36,7 @@
       </div>
       <div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
           <div class="categories_post">
-            <a href="{{url('/post/gear')}}">
+            <a href="{{url('/post/trip')}}">
               <img class="card-img rounded-0" src="{{asset('images/site-content/home/hero-slide3.png')}}" alt="post">
               <div class="categories_details">
                   <div class="categories_text">
