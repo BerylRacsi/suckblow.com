@@ -32,7 +32,11 @@
           <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
             <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
               <li class="nav-item">
+                @guest
                 <a class="nav-link" href="{{url('/')}}">Home</a>
+                @else
+                <a class="nav-link" href="{{url('/home')}}">Home</a>
+                @endguest
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{url('/blog')}}">Blog</a>
@@ -58,7 +62,7 @@
                   {{ Auth::user()->name }}
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                  <a href="" class="dropdown-item">
+                  <a href="{{url('/dashboard')}}" class="dropdown-item">
                     Dashboard
                   </a>
                   <div class="dropdown-divider"></div>
@@ -75,8 +79,8 @@
               </li>
               <br>
               <li class="nav-item">
-                <a class="button button-header" href="{{url('/register')}}">
-                  Add Post
+                <a class="button button-header" href="{{url('/select')}}">
+                  Post Ads
                 </a>
               </li>
               <br>

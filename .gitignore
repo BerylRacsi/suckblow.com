@@ -4,6 +4,7 @@
 /public/images/*
 !/public/images/agency_logo
 !/public/images/layout
+!/public/images/site-content
 /public/adminpanel
 /public/main/vendors
 /storage/*.key

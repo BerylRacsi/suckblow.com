@@ -27,8 +27,17 @@ Route::post('/login/partner', 'Auth\LoginController@partnerLogin');
 Route::post('/register/admin', 'Auth\RegisterController@createAdmin');
 Route::post('/register/partner', 'Auth\RegisterController@createPartner');
 
+Route::get('/gear','GearController@index');
+Route::get('/gear/{id}','GearController@show');
+
 Route::group(['middleware' => ['auth:partner,web']], function () {
 	Route::get('/home', 'HomeController@index');
+    Route::get('/select','HomeController@select');
+
+    Route::get('dashboard','DashboardController@index');
+
+    Route::get('/post/gear','GearController@create');
+    Route::post('/post/gear','GearController@store');
 });
 
 /*Admin*/

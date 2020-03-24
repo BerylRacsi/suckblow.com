@@ -61,7 +61,7 @@ class GearController extends Controller
                 break;
             
             default:
-                return view('welcome');
+                return view('main/gear/index',compact('gears'));
                 break;
         }
     }
@@ -81,7 +81,7 @@ class GearController extends Controller
                 break;
             
             default:
-                return view('welcome');
+                return view('main/gear/create');
                 break;
         }
     }
@@ -181,7 +181,7 @@ class GearController extends Controller
                 break;
             
             default:
-                return redirect()->intended('/')->with('success','Ads Submitted.');
+                return redirect()->intended('/home')->with('success','Ads Submitted.');
                 break;
         }
     }
@@ -204,7 +204,7 @@ class GearController extends Controller
                 break;
             
             default:
-                return view('welcome');
+                return view('main/gear/detail',compact('gear'));
                 break;
         }
     }

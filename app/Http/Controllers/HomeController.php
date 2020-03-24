@@ -25,4 +25,9 @@ class HomeController extends Controller
     {
         return view('main/home');
     }
+
+    public function select()
+    {
+        return view('main/select');
+    }
 }
