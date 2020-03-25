@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Suck Blow</title>
 
-  <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"/>
+  <link rel="icon" href="{{ asset('images/favicon.ico') }}" type="image/x-icon"/>
 
   <link rel="stylesheet" href="{{asset('main/vendors/bootstrap/bootstrap.min.css')}}">
   <link rel="stylesheet" href="{{asset('main/vendors/fontawesome/css/all.min.css')}}">
