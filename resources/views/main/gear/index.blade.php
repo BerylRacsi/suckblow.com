@@ -16,57 +16,48 @@
                     	<input class="pixel-radio" type="radio" id="Regulator" name="Regulator">
                     	<label for="Regulator">
                     		Regulator
-                    		<span> (100)</span>
                     	</label>
                     </li>
                     <li class="filter-list">
                     	<input class="pixel-radio" type="radio" id="Mask" name="Mask">
                     	<label for="Mask">
                     		Mask
-                    		<span> (100)</span>
                     	</label>
                     </li>
                     <li class="filter-list">
                     	<input class="pixel-radio" type="radio" id="Fins" name="Fins">
                     	<label for="Fins">
                     		Fins
-                    		<span> (100)</span>
                     	</label>
                     </li><li class="filter-list">
                     	<input class="pixel-radio" type="radio" id="BCD" name="BCD">
                     	<label for="BCD">
                     		BCD
-                    		<span> (100)</span>
                     	</label>
                     </li><li class="filter-list">
                     	<input class="pixel-radio" type="radio" id="Wetsuit" name="Wetsuit">
                     	<label for="Wetsuit">
                     		Wetsuit
-                    		<span> (100)</span>
                     	</label>
                     </li><li class="filter-list">
                     	<input class="pixel-radio" type="radio" id="Torch" name="Torch">
                     	<label for="Torch">
                     		Torch
-                    		<span> (100)</span>
                     	</label>
                     </li><li class="filter-list">
                     	<input class="pixel-radio" type="radio" id="Hook" name="Hook">
                     	<label for="Hook">
                     		Hook
-                    		<span> (100)</span>
                     	</label>
                     </li><li class="filter-list">
                     	<input class="pixel-radio" type="radio" id="SMB & Reels" name="SMB & Reels">
                     	<label for="SMB & Reels">
                     		SMB & Reels
-                    		<span> (100)</span>
                     	</label>
                     </li><li class="filter-list">
                     	<input class="pixel-radio" type="radio" id="Accessories" name="Accessories">
                     	<label for="Accessories">
                     		Accessories
-                    		<span> (100)</span>
                     	</label>
                     </li>
                   </ul>

@@ -30,6 +30,10 @@ Route::post('/register/partner', 'Auth\RegisterController@createPartner');
 Route::get('/gear','GearController@index');
 Route::get('/gear/{id}','GearController@show');
 
+Route::get('/course/agency','CourseController@agency');
+Route::get('/course/agency/{agency}','CourseController@selected');
+Route::get('/course/{id}','CourseController@show');
+
 Route::group(['middleware' => ['auth:partner,web']], function () {
 	Route::get('/home', 'HomeController@index');
     Route::get('/select','HomeController@select');
@@ -38,6 +42,9 @@ Route::group(['middleware' => ['auth:partner,web']], function () {
 
     Route::get('/post/gear','GearController@create');
     Route::post('/post/gear','GearController@store');
+
+    Route::get('/post/course','CourseController@create');
+    Route::post('/post/course','CourseController@store');
 });
 
 /*Admin*/

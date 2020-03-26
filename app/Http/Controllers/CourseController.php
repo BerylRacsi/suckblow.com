@@ -54,6 +54,21 @@ class CourseController extends Controller
         ]);
     }
 
+    public function agency()
+    {
+        $agencies = Agency::all();
+
+        return view('main/course/agency',compact('agencies'));
+    }
+
+    public function selected($agency)
+    {
+        $agencies = Agency::all();
+        $courses = Course::where('agency',$agency)->get();
+
+        return view('main/course/index',compact('agencies','courses'));
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -93,7 +108,7 @@ class CourseController extends Controller
                 break;
             
             default:
-                return view('welcome');
+                return view('main/course/create',compact('agencies'));
                 break;
         }
     }
@@ -171,12 +186,11 @@ class CourseController extends Controller
 
         switch ($role) {
             case 'admin':
-
                 return redirect()->intended('admin/course')->with('success','Ads Submitted.');
                 break;
             
             default:
-                return redirect()->intended('/')->with('success','Ads Submitted.');
+                return redirect()->intended('course/agency')->with('success','Ads Submitted.');
                 break;
         }
     }
@@ -199,7 +213,7 @@ class CourseController extends Controller
                 break;
             
             default:
-                return view('welcome');
+                return view('main/course/detail',compact('course'));
                 break;
         }
     }

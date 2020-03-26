@@ -21,7 +21,7 @@
 					<hr>
 					<ul class="list">
 						<li>
-							<a class="active" href="#">
+							<a href="#">
 								<strong>
 								<span>Category</span> : {{$gear->category}}
 								</strong>
@@ -56,7 +56,7 @@
 							<a href="#">
 								<strong>
 								<span>Product Video</span> :
-                <a href="{{$gear->link}}">
+                <a href="https://{{$gear->link}}">
                   <i class="fab fa-youtube fa-2x" style="margin-left: 5px"></i>
                 </a>
                 </strong>
@@ -80,8 +80,10 @@
       <h2>Related <span class="section-intro__style">Product</span></h2>
     </div>
 		<div class="row mt-30">
+      @for($i=0 ; $i<4; $i++)
       <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
         <div class="single-search-product-wrapper">
+          @for($j=0 ; $j<3; $j++)
           <div class="single-search-product d-flex">
             <a href="#"><img src="{{url('images/site-content/home/hero-slide1.png')}}" alt=""></a>
             <div class="desc">
@@ -89,100 +91,11 @@
                 <div class="price">$170.00</div>
             </div>
           </div>
-          <div class="single-search-product d-flex">
-            <a href="#"><img src="{{url('images/site-content/home/hero-slide1.png')}}" alt=""></a>
-            <div class="desc">
-              <a href="#" class="title">Gray Coffee Cup</a>
-              <div class="price">$170.00</div>
-            </div>
-          </div>
-          <div class="single-search-product d-flex">
-            <a href="#"><img src="{{url('images/site-content/home/hero-slide1.png')}}" alt=""></a>
-            <div class="desc">
-              <a href="#" class="title">Gray Coffee Cup</a>
-              <div class="price">$170.00</div>
-            </div>
-          </div>
+          @endfor
         </div>
       </div>
+      @endfor
 
-      <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-        <div class="single-search-product-wrapper">
-          <div class="single-search-product d-flex">
-            <a href="#"><img src="{{url('images/site-content/home/hero-slide2.png')}}" alt=""></a>
-            <div class="desc">
-                <a href="#" class="title">Gray Coffee Cup</a>
-                <div class="price">$170.00</div>
-            </div>
-          </div>
-          <div class="single-search-product d-flex">
-            <a href="#"><img src="{{url('images/site-content/home/hero-slide2.png')}}" alt=""></a>
-            <div class="desc">
-              <a href="#" class="title">Gray Coffee Cup</a>
-              <div class="price">$170.00</div>
-            </div>
-          </div>
-          <div class="single-search-product d-flex">
-            <a href="#"><img src="{{url('images/site-content/home/hero-slide2.png')}}" alt=""></a>
-            <div class="desc">
-              <a href="#" class="title">Gray Coffee Cup</a>
-              <div class="price">$170.00</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-        <div class="single-search-product-wrapper">
-          <div class="single-search-product d-flex">
-            <a href="#"><img src="{{url('images/site-content/home/hero-slide3.png')}}" alt=""></a>
-            <div class="desc">
-                <a href="#" class="title">Gray Coffee Cup</a>
-                <div class="price">$170.00</div>
-            </div>
-          </div>
-          <div class="single-search-product d-flex">
-            <a href="#"><img src="{{url('images/site-content/home/hero-slide3.png')}}" alt=""></a>
-            <div class="desc">
-              <a href="#" class="title">Gray Coffee Cup</a>
-              <div class="price">$170.00</div>
-            </div>
-          </div>
-          <div class="single-search-product d-flex">
-            <a href="#"><img src="{{url('images/site-content/home/hero-slide3.png')}}" alt=""></a>
-            <div class="desc">
-              <a href="#" class="title">Gray Coffee Cup</a>
-              <div class="price">$170.00</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-        <div class="single-search-product-wrapper">
-          <div class="single-search-product d-flex">
-            <a href="#"><img src="{{url('images/site-content/home/hero-slide1.png')}}" alt=""></a>
-            <div class="desc">
-                <a href="#" class="title">Gray Coffee Cup</a>
-                <div class="price">$170.00</div>
-            </div>
-          </div>
-          <div class="single-search-product d-flex">
-            <a href="#"><img src="{{url('images/site-content/home/hero-slide2.png')}}" alt=""></a>
-            <div class="desc">
-              <a href="#" class="title">Gray Coffee Cup</a>
-              <div class="price">$170.00</div>
-            </div>
-          </div>
-          <div class="single-search-product d-flex">
-            <a href="#"><img src="{{url('images/site-content/home/hero-slide3.png')}}" alt=""></a>
-            <div class="desc">
-              <a href="#" class="title">Gray Coffee Cup</a>
-              <div class="price">$170.00</div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 	</div>
 </section>

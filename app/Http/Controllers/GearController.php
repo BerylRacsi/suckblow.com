@@ -174,14 +174,14 @@ class GearController extends Controller
 
         $role = $this->guardCheck();
 
+
         switch ($role) {
             case 'admin':
-
                 return redirect()->intended('admin/gear')->with('success','Ads Submitted.');
                 break;
-            
+
             default:
-                return redirect()->intended('/home')->with('success','Ads Submitted.');
+                return redirect()->intended('gear')->with('success','Ads Submitted.');
                 break;
         }
     }

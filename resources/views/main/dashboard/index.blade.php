@@ -39,7 +39,7 @@
                     <td>
                       <h5>Rp&nbsp999.999</h5>
                     </td>
-                    <td style="display: flex; justify-content: center;">
+                    <td>
                       <div class="btn-group">
                         <button type="button" class="btn btn-default dropdown-toggle" id="dropdownAction" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Manage
@@ -92,7 +92,7 @@
                     <td>
                       <h5>Dummy Dive Center</h5>
                     </td>
-                    <td style="display: flex; justify-content: center;">
+                    <td>
                       <div class="btn-group">
                         <button type="button" class="btn btn-default dropdown-toggle" id="dropdownAction" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Manage
@@ -145,7 +145,7 @@
                     <td>
                       <h5>Rp&nbsp999.999</h5>
                     </td>
-                    <td style="display: flex; justify-content: center;">
+                    <td>
                       <div class="btn-group">
                         <button type="button" class="btn btn-default dropdown-toggle" id="dropdownAction" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Manage
