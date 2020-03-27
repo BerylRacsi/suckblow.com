@@ -80,21 +80,26 @@
       <h2>Related <span class="section-intro__style">Product</span></h2>
     </div>
 		<div class="row mt-30">
-      @for($i=0 ; $i<4; $i++)
+      @foreach($related->chunk(3) as $chunk)
       <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
         <div class="single-search-product-wrapper">
-          @for($j=0 ; $j<3; $j++)
+          @foreach($chunk as $item)
           <div class="single-search-product d-flex">
-            <a href="#"><img src="{{url('images/site-content/home/hero-slide1.png')}}" alt=""></a>
+            <a href="#">
+            	@foreach (explode(',', $item->image) as $image)
+            	<img src="{{url($image)}}" alt="">
+            	@break
+            	@endforeach
+            </a>
             <div class="desc">
-                <a href="#" class="title">Gray Coffee Cup</a>
-                <div class="price">$170.00</div>
+                <a href="#" class="title">{{$item->name}}</a>
+                <div class="price">Rp {{$item->price}}</div>
             </div>
           </div>
-          @endfor
+          @endforeach
         </div>
       </div>
-      @endfor
+      @endforeach
 
     </div>
 	</div>

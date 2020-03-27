@@ -59,7 +59,7 @@ class GearController extends Controller
                         ->orWhere('description' , 'LIKE' , '%' . $keyword . '%')
                         ->orWhere('category' , 'LIKE' , '%' . $keyword . '%')
                         ->get();
-                        
+
         return view('main/gear/index',compact('gears'));
     }
 
@@ -215,6 +215,8 @@ class GearController extends Controller
     {
         $gear = Gear::find($id);
 
+        $related = Gear::where('category',$gear->category)->inRandomOrder()->limit(12)->get();
+
         $role = $this->guardCheck();
 
         switch ($role) {
@@ -223,7 +225,7 @@ class GearController extends Controller
                 break;
             
             default:
-                return view('main/gear/detail',compact('gear'));
+                return view('main/gear/detail',compact('gear','related'));
                 break;
         }
     }
