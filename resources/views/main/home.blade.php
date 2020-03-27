@@ -3,7 +3,7 @@
 @section('content')
 
 <!--================ Hero Carousel start =================-->
-<section class="section-margin mt-10">
+<section class="section-margin--small mt-5">
   <div class="owl-carousel owl-theme hero-carousel">
     <div class="hero-carousel__slide">
       <img src="{{asset('images/site-content/home/hero-slide1.png')}}" alt="" class="img-fluid">

@@ -37,6 +37,11 @@ Route::get('/course/search','CourseController@search');
 Route::get('/course/agency/{agency}','CourseController@selected');
 Route::get('/course/{id}','CourseController@show');
 
+Route::get('/trip','TripController@index');
+Route::get('/trip/search','TripController@search');
+Route::get('/usertrip/{id}','UserTripController@show');
+Route::get('/partnertrip/{id}','PartnerTripController@show');
+
 Route::group(['middleware' => ['auth:partner,web']], function () {
 	Route::get('/home', 'HomeController@index');
     Route::get('/select','HomeController@select');
@@ -48,7 +53,14 @@ Route::group(['middleware' => ['auth:partner,web']], function () {
 
     Route::get('/post/course','CourseController@create');
     Route::post('/post/course','CourseController@store');
+
 });
+
+Route::get('/post/usertrip','UserTripController@create')->middleware('auth:web');
+Route::post('/post/usertrip','UserTripController@store')->middleware('auth:web');
+
+Route::get('/post/partnertrip','PartnerTripController@create')->middleware('auth:partner');
+Route::post('/post/partnertrip','PartnerTripController@store')->middleware('auth:partner');
 
 /*Admin*/
 Route::group(['prefix' => 'admin','middleware' => 'auth:admin'], function () {

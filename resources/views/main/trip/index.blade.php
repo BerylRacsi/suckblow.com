@@ -7,13 +7,13 @@
   
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="d-block w-100" src="{{asset('images/site-content/course/scene-1.jpg')}}" alt="First slide" style="max-height: 400px; width: 100%;">
+      <img class="d-block w-100" src="{{asset('images/site-content/trip/scene-1.jpg')}}" alt="First slide" style="max-height: 400px; width: 100%;">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="{{asset('images/site-content/course/scene-2.jpg')}}" alt="Second slide" style="max-height: 400px; width: 100%;">
+      <img class="d-block w-100" src="{{asset('images/site-content/trip/scene-2.jpg')}}" alt="Second slide" style="max-height: 400px; width: 100%;">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="{{asset('images/site-content/course/scene-3.jpg')}}" alt="Third slide" style="max-height: 400px; width: 100%;">
+      <img class="d-block w-100" src="{{asset('images/site-content/trip/scene-3.jpg')}}" alt="Third slide" style="max-height: 400px; width: 100%;">
     </div>
   </div>
 
@@ -30,10 +30,10 @@
 		<div class="card-body">
 			<div class="row">
 				<div class="col-lg-10 col-md-8">
-          <form action="{{url('/course/search')}}" method="GET">
+          <form action="{{url('/trip/search')}}" method="GET">
 					<div class="form-group">
 						<div class="input-group">
-							<input type="text" name="search" class="form-control" placeholder="Search in Course" value="{{ old('search') }}">
+							<input type="text" name="search" class="form-control" placeholder="Search in Trip" value="{{ old('search') }}">
 							<div class="input-group-prepend">
 	          		<span class="input-group-text" id="search-icon">
 	          			<i class="fas fa-search"></i>
@@ -58,16 +58,19 @@
 		<section class="lattest-product-area pb-40 category-list">
 			<div class="container">
 				<div class="row">
-		      @foreach($agencies as $agency)
+		      @foreach($trips as $trip)
 		      <div class="col-md-6 col-lg-3">
 		        <div class="card text-center card-product">
 		          <div class="card-product__img">
-		            <img class="card-img" src="{{asset($agency->image)}}" alt="">
+		          	@foreach (explode(',', $trip->image) as $image)
+		            <img class="card-img" src="{{asset($image)}}" alt="">
+		            @break
+		            @endforeach
 		          </div>
 		          <div class="card-body">
 		            <h4 class="card-product__title">
-		            	<a href="{{url('/course/agency',$agency->name)}}">
-		            		{{$agency->name}}
+		            	<a href="{{url('/'.$trip->link.'/'.$trip->id)}}">
+		            		{{$trip->name}}
 		            	</a>
 		            </h4>
 		          </div>

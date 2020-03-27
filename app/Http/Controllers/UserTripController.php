@@ -80,7 +80,7 @@ class UserTripController extends Controller
                 break;
             
             default:
-                return view('welcome');
+                return view('main/trip/create-user');
                 break;
         }
     }
@@ -216,7 +216,7 @@ class UserTripController extends Controller
                 break;
             
             default:
-                return redirect()->intended('/')->with('success','Ads Submitted.');
+                return redirect()->intended('trip')->with('success','Ads Submitted.');
                 break;
         }
     }
@@ -239,7 +239,7 @@ class UserTripController extends Controller
                 break;
             
             default:
-                return view('welcome');
+                return view('main/trip/detail-user',compact('trip'));
                 break;
         }
     }

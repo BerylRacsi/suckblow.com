@@ -1,6 +1,7 @@
-@extends('admin.app')
+@extends('layouts.master')
 
 @section('content')
+<br>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -9,7 +10,7 @@
 
                 <div class="card-body">
                     <div class="card-body">
-                    <form method="POST" action="{{action('PartnerTripController@store')}}" enctype="multipart/form-data">
+                    <form method="POST" action="{{url('/post/partnertrip')}}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
@@ -173,4 +174,5 @@
         </div>
     </div>
 </div>
+<br>
 @endsection
