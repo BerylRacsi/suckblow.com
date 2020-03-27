@@ -69,6 +69,22 @@ class CourseController extends Controller
         return view('main/course/index',compact('agencies','courses'));
     }
 
+    public function search(Request $request)
+    {
+        $keyword =  $request->search;
+
+        $courses = Course::where('name' , 'LIKE' , '%' . $keyword . '%')
+                        ->orWhere('agency' , 'LIKE' , '%' . $keyword . '%')
+                        ->orWhere('center' , 'LIKE' , '%' . $keyword . '%')
+                        ->orWhere('ig' , 'LIKE' , '%' . $keyword . '%')
+                        ->orWhere('fb' , 'LIKE' , '%' . $keyword . '%')
+                        ->get();
+
+        $agencies = Agency::all();
+                        
+        return view('main/course/index',compact('courses','agencies'));
+    }
+
     /**
      * Display a listing of the resource.
      *

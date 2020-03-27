@@ -28,9 +28,12 @@ Route::post('/register/admin', 'Auth\RegisterController@createAdmin');
 Route::post('/register/partner', 'Auth\RegisterController@createPartner');
 
 Route::get('/gear','GearController@index');
+Route::get('/gear/search','GearController@search');
+Route::get('/gear/category/{category}','GearController@selected');
 Route::get('/gear/{id}','GearController@show');
 
 Route::get('/course/agency','CourseController@agency');
+Route::get('/course/search','CourseController@search');
 Route::get('/course/agency/{agency}','CourseController@selected');
 Route::get('/course/{id}','CourseController@show');
 

@@ -27,10 +27,11 @@
   <div class="card" style="width: 80%; margin: 0 auto; position: absolute; left: 0; right: 0; z-index: 1; display: inline-block; bottom: -50px">
 		<div class="card-body">
 			<div class="row">
-				<div class="col-lg-10 col-md-8">
+  			<div class="col-lg-10 col-md-8">
+          <form action="{{url('/course/search')}}" method="GET">
 					<div class="form-group">
 						<div class="input-group">
-							<input type="text" class="form-control" name="">
+							<input type="text" name="search" class="form-control" placeholder="Search in Course" value="{{ old('search') }}">
 							<div class="input-group-prepend">
 	          		<span class="input-group-text" id="search-icon">
 	          			<i class="fas fa-search"></i>
@@ -40,8 +41,9 @@
 					</div>
 				</div>
 				<div class="col-lg-2 col-md-4">
-					<a href="#" class="btn btn-primary btn-block">Search</a>
+					<button class="btn btn-primary btn-block" type="submit">Search</button>
 				</div>
+        </form>
 			</div>
 		</div>
 	</div>
@@ -61,8 +63,8 @@
                 <ul>
                   @foreach($agencies as $agency)
                   <li class="filter-list">
-                    <input class="pixel-radio" type="radio" id="Regulator" name="Regulator">
-                    <label for="Regulator">
+                    <input class="pixel-radio" type="radio" id="{{$agency->name}}" name="agenciesList" onclick="window.location = '{{url('/course/agency/' . $agency->name)}}' ;">
+                    <label for="{{$agency->name}}">
                       {{$agency->name}}
                     </label>
                   </li>

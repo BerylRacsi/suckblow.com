@@ -44,6 +44,25 @@ class GearController extends Controller
         ]);
     }
 
+    public function selected($category)
+    {
+        $gears = Gear::where('category',$category)->get();
+
+        return view('main/gear/index',compact('gears'));
+    }
+
+    public function search(Request $request)
+    {
+        $keyword =  $request->search;
+
+        $gears = Gear::where('name' , 'LIKE' , '%' . $keyword . '%')
+                        ->orWhere('description' , 'LIKE' , '%' . $keyword . '%')
+                        ->orWhere('category' , 'LIKE' , '%' . $keyword . '%')
+                        ->get();
+                        
+        return view('main/gear/index',compact('gears'));
+    }
+
     /**
      * Display a listing of the resource.
      *

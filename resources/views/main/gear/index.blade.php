@@ -13,49 +13,49 @@
                 <form action="#">
                   <ul>
                     <li class="filter-list">
-                    	<input class="pixel-radio" type="radio" id="Regulator" name="Regulator">
+                    	<input class="pixel-radio" type="radio" id="Regulator" name="gearCategory" onclick="window.location = '{{url('/gear/category/Regulator')}}' ;">
                     	<label for="Regulator">
                     		Regulator
                     	</label>
                     </li>
                     <li class="filter-list">
-                    	<input class="pixel-radio" type="radio" id="Mask" name="Mask">
+                    	<input class="pixel-radio" type="radio" id="Mask" name="gearCategory" onclick="window.location = '{{url('/gear/category/Mask')}}' ;">
                     	<label for="Mask">
                     		Mask
                     	</label>
                     </li>
                     <li class="filter-list">
-                    	<input class="pixel-radio" type="radio" id="Fins" name="Fins">
+                    	<input class="pixel-radio" type="radio" id="Fins" name="gearCategory" onclick="window.location = '{{url('/gear/category/Fins')}}' ;">
                     	<label for="Fins">
                     		Fins
                     	</label>
                     </li><li class="filter-list">
-                    	<input class="pixel-radio" type="radio" id="BCD" name="BCD">
+                    	<input class="pixel-radio" type="radio" id="Buoyancy Compensation Device (BCD)" name="gearCategory" onclick="window.location = '{{url('/gear/category/Buoyancy Compensation Device (BCD)')}}' ;">
                     	<label for="BCD">
                     		BCD
                     	</label>
                     </li><li class="filter-list">
-                    	<input class="pixel-radio" type="radio" id="Wetsuit" name="Wetsuit">
+                    	<input class="pixel-radio" type="radio" id="Wetsuit" name="gearCategory" onclick="window.location = '{{url('/gear/category/Wetsuit')}}' ;">
                     	<label for="Wetsuit">
                     		Wetsuit
                     	</label>
                     </li><li class="filter-list">
-                    	<input class="pixel-radio" type="radio" id="Torch" name="Torch">
+                    	<input class="pixel-radio" type="radio" id="Torch" name="gearCategory" onclick="window.location = '{{url('/gear/category/Torch')}}' ;">
                     	<label for="Torch">
                     		Torch
                     	</label>
                     </li><li class="filter-list">
-                    	<input class="pixel-radio" type="radio" id="Hook" name="Hook">
+                    	<input class="pixel-radio" type="radio" id="Hook" name="gearCategory" onclick="window.location = '{{url('/gear/category/Hook')}}' ;">
                     	<label for="Hook">
                     		Hook
                     	</label>
                     </li><li class="filter-list">
-                    	<input class="pixel-radio" type="radio" id="SMB & Reels" name="SMB & Reels">
+                    	<input class="pixel-radio" type="radio" id="SMB & Reels" name="gearCategory" onclick="window.location = '{{url('/gear/category/SMB & Reels')}}' ;">
                     	<label for="SMB & Reels">
                     		SMB & Reels
                     	</label>
                     </li><li class="filter-list">
-                    	<input class="pixel-radio" type="radio" id="Accessories" name="Accessories">
+                    	<input class="pixel-radio" type="radio" id="Accessories" name="gearCategory" onclick="window.location = '{{url('/gear/category/Accessories')}}' ;">
                     	<label for="Accessories">
                     		Accessories
                     	</label>
@@ -69,14 +69,16 @@
         <div class="col-xl-9 col-lg-8 col-md-7">
           <!-- Start Filter Bar -->
           <div class="filter-bar d-flex flex-wrap align-items-center">
-            <div>
-              <div class="input-group filter-bar-search">
-                <input type="text" placeholder="Search">
-                <div class="input-group-append">
-                  <button type="button"><i class="ti-search"></i></button>
+            <form action="{{url('/gear/search')}}" method="GET">
+              <div class="form-group">
+                <div class="input-group filter-bar-search">
+                    <input type="text" name="search" class="form-control" placeholder="Search for Gear" value="{{ old('search') }}">
+                    <div class="input-group-prepend">
+                      <button type="submit"><i class="ti-search"></i></button>
+                    </div>
                 </div>
               </div>
-            </div>
+            </form>
           </div>
           <!-- End Filter Bar -->
           <!-- Start Best Seller -->
