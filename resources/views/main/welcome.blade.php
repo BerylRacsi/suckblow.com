@@ -13,7 +13,7 @@
     </div>
     <div class="hero-carousel__slide">
       <img src="{{asset('images/site-content/home/hero-slide2.png')}}" alt="" class="img-fluid">
-      <a href="{{url('/course')}}" class="hero-carousel__slideOverlay">
+      <a href="{{url('/course/agency')}}" class="hero-carousel__slideOverlay">
         <h3>Course</h3>
       </a>
     </div>

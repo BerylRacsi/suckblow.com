@@ -35,11 +35,11 @@
           <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
             <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
               <li class="nav-item">
-                @guest
-                <a class="nav-link" href="{{url('/')}}">Home</a>
-                @else
+                @if(Auth::guard('partner')->check() || Auth::guard('web')->check())
                 <a class="nav-link" href="{{url('/home')}}">Home</a>
-                @endguest
+                @else
+                <a class="nav-link" href="{{url('/')}}">Home</a>
+                @endif
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{url('/blog')}}">Blog</a>
@@ -52,17 +52,15 @@
               </li>
             </ul>
 
-            @guest
-            <br>
-            <ul class="nav-shop">
-              <li class="nav-item"><a class="button button-header" href="{{url('/register')}}">Sign Up</a></li>
-              <li class="nav-item"><a class="button button-header" href="{{url('/login')}}">Login</a></li>
-            </ul>
-            @else
+            @if(Auth::guard('partner')->check() || Auth::guard('web')->check())
             <ul class="navbar-nav ml-auto">
               <li class="nav-item dropdown" style="margin-right: 10px;">
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color: #fff;">
-                  {{ Auth::user()->name }}
+                  @if(Auth::guard('partner')->check())
+                    {{ Auth::guard('partner')->user()->name }}
+                  @elseif(Auth::guard('web')->check())
+                    {{ Auth::guard('web')->user()->name }}
+                  @endif
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                   <a href="{{url('/dashboard')}}" class="dropdown-item">
@@ -88,7 +86,21 @@
               </li>
               <br>
             </ul>
-            @endguest
+            @else
+            <br>
+            <ul class="nav-shop">
+              <li class="nav-item"><a class="button button-header" href="{{url('/register')}}">Sign Up</a></li>
+              <li class="nav-item"><a class="button button-header" href="{{url('/login')}}">Login</a></li>
+            </ul>
+            @endauth
+
+            <!-- @guest
+            <br>
+            <ul class="nav-shop">
+              <li class="nav-item"><a class="button button-header" href="{{url('/register')}}">Sign Up</a></li>
+              <li class="nav-item"><a class="button button-header" href="{{url('/login')}}">Login</a></li>
+            </ul>
+            @endguest -->
 
           </div>
         </div>
@@ -124,11 +136,11 @@
             <div class="single-footer-widget tp_widgets">
               <h4 class="footer_title">Quick Links</h4>
               <ul class="list">
-                @guest
-                <li><a href="{{url('/')}}">Home</a></li>
-                @else
+                @if(Auth::guard('partner')->check() || Auth::guard('web')->check())
                 <li><a href="{{url('/home')}}">Home</a></li>
-                @endguest
+                @else
+                <li><a href="{{url('/')}}">Home</a></li>
+                @endif
                 <li><a href="{{url('/blog')}}">Blog</a></li>
                 <li><a href="{{url('/about')}}">About</a></li>
                 <li><a href="{{url('/contact')}}">Contact</a></li>

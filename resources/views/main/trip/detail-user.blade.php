@@ -16,6 +16,42 @@
 				</div>
 			</div>
 			<div class="col-lg-5 offset-lg-1">
+				<div class="card lister-contact">
+					@if(Auth::guard('partner')->check() || Auth::guard('web')->check())
+					<div class="card-body">
+						<div class="row">
+							<div class="col-4">
+								<img src="{{asset('images/layout/suckblow-logo.png')}}" class="img-fluid" width="50" height="50">
+							</div>
+							<div class="col-8">
+								<a href="#">
+									<strong>
+										<span style="display: inline-block; width: 50px;">
+											Lister
+										</span> : Suck Blow 
+									</strong>
+								</a>
+								<br>
+								<a href="#">
+									<strong>
+										<span style="display: inline-block; width: 50px;">
+											Phone
+										</span> : +6281399998888
+									</strong>
+								</a>
+							</div>
+						</div>
+					</div>
+					@else
+					<div class="card-body text-center" style="display: flex; align-items: center; margin: 0 auto; vertical-align: center">
+						<a href="{{route('login')}}">
+							<strong>
+								<i>You need to login to see lister contact</i>
+							</strong>
+						</a>
+					</div>
+					@endif
+				</div>
 				<div class="s_product_text">
 					<h3>Destination : {{$trip->location}}</h3>
 					<h2>Rp {{$trip->price}}</h2>

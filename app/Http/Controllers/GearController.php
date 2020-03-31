@@ -215,7 +215,8 @@ class GearController extends Controller
     {
         $gear = Gear::find($id);
 
-        $related = Gear::where('category',$gear->category)->inRandomOrder()->limit(12)->get();
+        $query = Gear::where('category',$gear->category)->inRandomOrder()->limit(12)->get();
+        $related = $query->except($id);
 
         $role = $this->guardCheck();
 
